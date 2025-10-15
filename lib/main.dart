@@ -1,4 +1,3 @@
-import 'package:evencir_test/feature/home/presentation/home_screen.dart';
 import 'package:evencir_test/feature/navbar/custom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,10 +20,18 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+            brightness: Brightness.light,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: Brightness.light),
+            scaffoldBackgroundColor: Colors.white,
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.black, brightness: Brightness.dark),
             scaffoldBackgroundColor: Colors.black,
             useMaterial3: true,
           ),
+          themeMode: ThemeMode.system, // Follows system theme
           home: CustomNavBar(),
         );
       },

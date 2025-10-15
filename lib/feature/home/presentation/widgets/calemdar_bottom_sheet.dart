@@ -33,14 +33,18 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     String monthName = _getMonthName(_selectedMonth.month);
     int year = _selectedMonth.year;
 
     return Container(
-      height: 0.5.sh, // Responsive height using screen height
+      height: 0.5.sh,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: isDarkMode ? Colors.black : Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        boxShadow: isDarkMode
+            ? null
+            : [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10.r, offset: Offset(0, -2.h))],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -50,7 +54,10 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
             width: 40.w,
             height: 4.h,
             margin: EdgeInsets.symmetric(vertical: 8.h),
-            decoration: BoxDecoration(color: Colors.grey[600], borderRadius: BorderRadius.circular(2.r)),
+            decoration: BoxDecoration(
+              color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
+              borderRadius: BorderRadius.circular(2.r),
+            ),
           ),
           // Header with navigation
           Padding(
@@ -59,7 +66,7 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(Icons.chevron_left, color: Colors.white, size: 24.sp),
+                  icon: Icon(Icons.chevron_left, color: isDarkMode ? Colors.white : Colors.black87, size: 24.sp),
                   onPressed: _previousMonth,
                   padding: EdgeInsets.all(8.w),
                   constraints: BoxConstraints(minWidth: 40.w, minHeight: 40.h),
@@ -69,12 +76,12 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: isDarkMode ? Colors.white : Colors.black87,
                     letterSpacing: 0.5.w,
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.chevron_right, color: Colors.white, size: 24.sp),
+                  icon: Icon(Icons.chevron_right, color: isDarkMode ? Colors.white : Colors.black87, size: 24.sp),
                   onPressed: _nextMonth,
                   padding: EdgeInsets.all(8.w),
                   constraints: BoxConstraints(minWidth: 40.w, minHeight: 40.h),
@@ -93,7 +100,11 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
                       child: Center(
                         child: Text(
                           day,
-                          style: TextStyle(color: Colors.grey[400], fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -112,7 +123,7 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
                 childAspectRatio: 1.0,
                 mainAxisSpacing: 8.h,
                 crossAxisSpacing: 4.w,
-                children: _buildCalendarDays(),
+                children: _buildCalendarDays(isDarkMode),
               ),
             ),
           ),
@@ -122,14 +133,14 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
     );
   }
 
-  List<Widget> _buildCalendarDays() {
+  List<Widget> _buildCalendarDays(bool isDarkMode) {
     List<Widget> days = [];
     DateTime firstDayOfMonth = _selectedMonth;
-    int weekdayOfFirst = firstDayOfMonth.weekday; // 1 Mon - 7 Sun
+    int weekdayOfFirst = firstDayOfMonth.weekday;
     int daysInMonth = DateTime(_selectedMonth.year, _selectedMonth.month + 1, 0).day;
 
     // Add blanks before the first day
-    int blanks = weekdayOfFirst - 1; // 0 for Mon, 6 for Sun
+    int blanks = weekdayOfFirst - 1;
     for (int i = 0; i < blanks; i++) {
       days.add(SizedBox());
     }
@@ -153,7 +164,7 @@ class _CalendarBottomSheetState extends State<CalendarBottomSheet> {
               child: Text(
                 '$day',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black87,
                   fontSize: 16.sp,
                   fontWeight: isToday ? FontWeight.w600 : FontWeight.w400,
                 ),

@@ -8,8 +8,10 @@ class NutritionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(8.w),
@@ -21,17 +23,31 @@ class NutritionScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(AppImages.bellIcon, width: 18.w, height: 18.h, color: Colors.white),
+                    Image.asset(
+                      AppImages.bellIcon,
+                      width: 18.w,
+                      height: 18.h,
+                      color: isDarkMode ? Colors.white : Colors.black87,
+                    ),
                     Row(
                       children: [
-                        Image.asset(AppImages.timer, width: 18.w, height: 18.h, color: Colors.white),
+                        Image.asset(
+                          AppImages.timer,
+                          width: 18.w,
+                          height: 18.h,
+                          color: isDarkMode ? Colors.white : Colors.black87,
+                        ),
                         SizedBox(width: 4.w),
                         Text(
                           'Week 1/4',
-                          style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                         ),
                         IconButton(
-                          icon: Icon(Icons.arrow_drop_down, color: Colors.white, size: 24.sp),
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: isDarkMode ? Colors.white : Colors.black87,
+                            size: 24.sp,
+                          ),
                           onPressed: () {
                             showModalBottomSheet(
                               context: context,
@@ -43,14 +59,18 @@ class NutritionScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 18.w), // Invisible spacer to balance the layout
+                    SizedBox(width: 18.w),
                   ],
                 ),
                 SizedBox(height: 10.h),
                 // Date
                 Text(
                   'Today, 22 Dec 2024',
-                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                  ),
                 ),
                 SizedBox(height: 8.h),
                 // Calendar days
@@ -59,31 +79,31 @@ class NutritionScreen extends StatelessWidget {
                   children: [
                     Text(
                       'M',
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 12.sp),
                     ),
                     Text(
                       'TU',
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 12.sp),
                     ),
                     Text(
                       'W',
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 12.sp),
                     ),
                     Text(
                       'TH',
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 12.sp),
                     ),
                     Text(
                       'F',
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 12.sp),
                     ),
                     Text(
                       'SA',
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 12.sp),
                     ),
                     Text(
                       'SU',
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 12.sp),
                     ),
                   ],
                 ),
@@ -94,10 +114,13 @@ class NutritionScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.all(6.w),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
                       child: Text(
                         '21',
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                       ),
                     ),
                     Container(
@@ -108,47 +131,62 @@ class NutritionScreen extends StatelessWidget {
                       ),
                       child: Text(
                         '22',
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.all(6.w),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
                       child: Text(
                         '23',
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.all(6.w),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
                       child: Text(
                         '24',
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.all(6.w),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
                       child: Text(
                         '25',
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.all(6.w),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
                       child: Text(
                         '26',
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.all(6.w),
-                      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: isDarkMode ? Colors.black : Colors.white,
+                      ),
                       child: Text(
                         '27',
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                       ),
                     ),
                   ],
@@ -157,7 +195,7 @@ class NutritionScreen extends StatelessWidget {
                 Center(
                   child: SizedBox(
                     width: 30.w,
-                    child: Divider(color: Colors.grey[900], thickness: 3.h),
+                    child: Divider(color: isDarkMode ? Colors.grey[900] : Colors.grey[300], thickness: 3.h),
                   ),
                 ),
                 10.verticalSpace,
@@ -166,15 +204,24 @@ class NutritionScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Workouts',
-                      style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w500, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w500,
+                        color: isDarkMode ? Colors.white : Colors.black87,
+                      ),
                     ),
                     Row(
                       children: [
-                        Image.asset(AppImages.sun, width: 22.w, height: 22.h, color: Colors.white),
+                        Image.asset(
+                          AppImages.sun,
+                          width: 22.w,
+                          height: 22.h,
+                          color: isDarkMode ? Colors.white : Colors.black87,
+                        ),
                         SizedBox(width: 4.w),
                         Text(
                           '9°',
-                          style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 16.sp),
                         ),
                       ],
                     ),
@@ -184,7 +231,11 @@ class NutritionScreen extends StatelessWidget {
                 // Workout card
                 Container(
                   padding: EdgeInsets.all(16.w),
-                  decoration: BoxDecoration(color: Colors.grey[900], borderRadius: BorderRadius.circular(8.r)),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Colors.grey[900] : Colors.grey[100],
+                    borderRadius: BorderRadius.circular(8.r),
+                    border: isDarkMode ? null : Border.all(color: Colors.grey[300]!, width: 0.5.w),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -193,35 +244,51 @@ class NutritionScreen extends StatelessWidget {
                         children: [
                           Text(
                             'December 22 - 25m - 30m',
-                            style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14.sp),
                           ),
                           5.verticalSpace,
                           Text(
                             'Upper Body',
-                            style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.bold,
+                              color: isDarkMode ? Colors.white : Colors.black87,
+                            ),
                           ),
                         ],
                       ),
-                      Image.asset(AppImages.rightArrow, width: 18.w, height: 18.h, color: Colors.white),
+                      Image.asset(
+                        AppImages.rightArrow,
+                        width: 18.w,
+                        height: 18.h,
+                        color: isDarkMode ? Colors.white : Colors.black87,
+                      ),
                     ],
                   ),
                 ),
                 10.verticalSpace,
                 Text(
                   'My Insights',
-                  style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w500, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w500,
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                  ),
                 ),
                 5.verticalSpace,
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(16.w),
-                        height: 150.h,
-                        decoration: BoxDecoration(color: Colors.grey[900], borderRadius: BorderRadius.circular(8.r)),
+                        padding: EdgeInsets.all(12.w),
+                        decoration: BoxDecoration(
+                          color: isDarkMode ? Colors.grey[900] : Colors.grey[100],
+                          borderRadius: BorderRadius.circular(8.r),
+                          border: isDarkMode ? null : Border.all(color: Colors.grey[300]!, width: 0.5.w),
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -229,54 +296,68 @@ class NutritionScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '550',
-                                  style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w500, color: Colors.white),
+                                  style: TextStyle(
+                                    fontSize: 28.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: isDarkMode ? Colors.white : Colors.black87,
+                                  ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 4.h),
+                                  padding: EdgeInsets.only(bottom: 2.h),
                                   child: Text(
                                     'Calories',
-                                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: isDarkMode ? Colors.white : Colors.black87,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                             Text(
                               '1950 Remaining',
-                              style: TextStyle(color: Colors.grey[500], fontSize: 14.sp),
+                              style: TextStyle(
+                                color: isDarkMode ? Colors.grey[500] : Colors.grey[600],
+                                fontSize: 12.sp,
+                              ),
                             ),
-                            20.verticalSpace,
+                            SizedBox(height: 12.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   '0',
-                                  style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                                  style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 10.sp),
                                 ),
                                 Text(
                                   '2500',
-                                  style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                                  style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 10.sp),
                                 ),
                               ],
                             ),
                             SizedBox(height: 4.h),
                             LinearProgressIndicator(
                               value: 550 / 2500,
-                              backgroundColor: Colors.grey[800],
+                              backgroundColor: isDarkMode ? Colors.grey[800] : Colors.grey[300],
                               color: Colors.teal,
-                              minHeight: 4.h,
+                              minHeight: 3.h,
                             ),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(width: 16.w),
+                    SizedBox(width: 8.w),
                     Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(16.w),
-                        height: 150.h,
-                        decoration: BoxDecoration(color: Colors.grey[900], borderRadius: BorderRadius.circular(8.r)),
+                        padding: EdgeInsets.all(12.w),
+                        decoration: BoxDecoration(
+                          color: isDarkMode ? Colors.grey[900] : Colors.grey[100],
+                          borderRadius: BorderRadius.circular(8.r),
+                          border: isDarkMode ? null : Border.all(color: Colors.grey[300]!, width: 0.5.w),
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -284,31 +365,38 @@ class NutritionScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   '75',
-                                  style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.bold, color: Colors.white),
+                                  style: TextStyle(
+                                    fontSize: 28.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: isDarkMode ? Colors.white : Colors.black87,
+                                  ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 4.h),
+                                  padding: EdgeInsets.only(bottom: 2.h),
                                   child: Text(
                                     ' kg',
-                                    style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: isDarkMode ? Colors.white : Colors.black87,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
-                                Image.asset(AppImages.upArrow, height: 20.h, width: 20.w),
+                                Image.asset(AppImages.upArrow, height: 16.h, width: 16.w),
                                 2.horizontalSpace,
                                 Text(
                                   '+1.6kg',
-                                  style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                                  style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 10.sp),
                                 ),
                               ],
                             ),
-                            22.verticalSpace,
+                            SizedBox(height: 12.h),
                             Text(
                               'Weight',
-                              style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                              style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 16.sp),
                             ),
                           ],
                         ),
@@ -318,19 +406,20 @@ class NutritionScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 8.h),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
-                  decoration: BoxDecoration(color: Colors.grey[900], borderRadius: BorderRadius.circular(8.r)),
+                  padding: EdgeInsets.all(12.w),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Colors.grey[900] : Colors.grey[100],
+                    borderRadius: BorderRadius.circular(8.r),
+                    border: isDarkMode ? null : Border.all(color: Colors.grey[300]!, width: 0.5.w),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.h),
-                        child: Text(
-                          '0%',
-                          style: TextStyle(color: Colors.blue, fontSize: 30.sp),
-                        ),
+                      Text(
+                        '0%',
+                        style: TextStyle(color: Colors.blue, fontSize: 24.sp),
                       ),
-                      SizedBox(height: 5.h),
+                      SizedBox(height: 8.h),
                       Row(
                         children: [
                           Spacer(),
@@ -339,12 +428,12 @@ class NutritionScreen extends StatelessWidget {
                             children: [
                               Text(
                                 '2 L',
-                                style: TextStyle(color: Colors.blue, fontSize: 14.sp),
+                                style: TextStyle(color: Colors.blue, fontSize: 12.sp),
                               ),
-                              SizedBox(height: 8.h),
+                              SizedBox(height: 6.h),
                               SizedBox(
-                                height: 80.h,
-                                width: 50.w,
+                                height: 60.h,
+                                width: 40.w,
                                 child: Stack(
                                   clipBehavior: Clip.none,
                                   children: [
@@ -352,11 +441,14 @@ class NutritionScreen extends StatelessWidget {
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: List.generate(
-                                          12,
+                                          10,
                                           (index) => Container(
-                                            width: 4.w,
-                                            height: 4.h,
-                                            decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey[600]),
+                                            width: 3.w,
+                                            height: 3.h,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -366,24 +458,27 @@ class NutritionScreen extends StatelessWidget {
                                       left: 0,
                                       right: 0,
                                       child: Center(
-                                        child: Container(width: 20.w, height: 2.h, color: Colors.blue),
+                                        child: Container(width: 16.w, height: 2.h, color: Colors.blue),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 8.h),
+                              SizedBox(height: 6.h),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     '0 L',
-                                    style: TextStyle(color: Colors.blue, fontSize: 14.sp),
+                                    style: TextStyle(color: Colors.blue, fontSize: 12.sp),
                                   ),
-                                  SizedBox(width: 20.w),
+                                  SizedBox(width: 16.w),
                                   Text(
                                     '0ml',
-                                    style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                                    style: TextStyle(
+                                      color: isDarkMode ? Colors.white : Colors.black87,
+                                      fontSize: 12.sp,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -391,31 +486,34 @@ class NutritionScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 12.h),
+                      SizedBox(height: 10.h),
                       Text(
                         'Hydration',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 18.sp),
                       ),
-                      SizedBox(height: 4.h),
+                      SizedBox(height: 2.h),
                       Text(
                         'Log Now',
-                        style: TextStyle(color: Colors.grey[400], fontSize: 14.sp),
+                        style: TextStyle(color: isDarkMode ? Colors.grey[400] : Colors.grey[600], fontSize: 12.sp),
                       ),
-                      SizedBox(height: 8.h),
+                      SizedBox(height: 6.h),
                       Container(
-                        padding: EdgeInsets.all(8.w),
-                        decoration: BoxDecoration(color: Colors.teal[900], borderRadius: BorderRadius.circular(4.r)),
+                        padding: EdgeInsets.all(6.w),
+                        decoration: BoxDecoration(
+                          color: isDarkMode ? Colors.teal[900] : Colors.teal[100],
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
                         child: Center(
                           child: Text(
                             '500 ml added to water log',
-                            style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                            style: TextStyle(color: isDarkMode ? Colors.white : Colors.teal[900], fontSize: 12.sp),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 16.h), // Bottom padding
+                SizedBox(height: 16.h),
               ],
             ),
           ),

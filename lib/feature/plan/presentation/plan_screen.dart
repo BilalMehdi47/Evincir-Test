@@ -56,8 +56,10 @@ class _PlanScreenState extends State<PlanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 4.w),
         child: Column(
@@ -71,7 +73,7 @@ class _PlanScreenState extends State<PlanScreen> {
                 style: TextStyle(
                   fontSize: 28.sp,
                   fontWeight: FontWeight.w400,
-                  color: Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black87,
                   letterSpacing: -0.5.w,
                 ),
               ),
@@ -80,11 +82,11 @@ class _PlanScreenState extends State<PlanScreen> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 11.w),
               height: 3.h,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
-                  colors: [Color(0xFF5C6BC0), Color(0xFF3F51B5)],
+                  colors: isDarkMode ? [Color(0xFF5C6BC0), Color(0xFF3F51B5)] : [Color(0xFF7986CB), Color(0xFF5C6BC0)],
                 ),
               ),
             ),
@@ -99,7 +101,7 @@ class _PlanScreenState extends State<PlanScreen> {
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white,
+                      color: isDarkMode ? Colors.white : Colors.black87,
                       letterSpacing: -0.3.w,
                     ),
                   ),
@@ -114,11 +116,19 @@ class _PlanScreenState extends State<PlanScreen> {
                 children: [
                   Text(
                     'December 8-14',
-                    style: TextStyle(fontSize: 15.sp, color: const Color(0xFF8E8E93), fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: isDarkMode ? Color(0xFF8E8E93) : Colors.grey.shade600,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   Text(
                     'Total: 60min',
-                    style: TextStyle(fontSize: 15.sp, color: const Color(0xFF8E8E93), fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: isDarkMode ? Color(0xFF8E8E93) : Colors.grey.shade600,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ],
               ),
@@ -129,9 +139,9 @@ class _PlanScreenState extends State<PlanScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 itemCount: weekDays.length,
                 separatorBuilder: (context, index) =>
-                    Divider(height: 1.h, thickness: 1.h, color: const Color(0xFF1F1F21)),
+                    Divider(height: 1.h, thickness: 1.h, color: isDarkMode ? Color(0xFF1F1F21) : Colors.grey.shade300),
                 itemBuilder: (context, index) {
-                  return _buildDayItem(weekDays[index], index);
+                  return _buildDayItem(weekDays[index], index, isDarkMode);
                 },
               ),
             ),
@@ -139,11 +149,11 @@ class _PlanScreenState extends State<PlanScreen> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 11.w),
               height: 3.h,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
-                  colors: [Color(0xFF26A69A), Color(0xFF00897B)],
+                  colors: isDarkMode ? [Color(0xFF26A69A), Color(0xFF00897B)] : [Color(0xFF4DB6AC), Color(0xFF26A69A)],
                 ),
               ),
             ),
@@ -158,7 +168,7 @@ class _PlanScreenState extends State<PlanScreen> {
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white,
+                      color: isDarkMode ? Colors.white : Colors.black87,
                       letterSpacing: -0.3.w,
                     ),
                   ),
@@ -173,11 +183,19 @@ class _PlanScreenState extends State<PlanScreen> {
                 children: [
                   Text(
                     'December 14-22',
-                    style: TextStyle(fontSize: 15.sp, color: const Color(0xFF8E8E93), fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: isDarkMode ? Color(0xFF8E8E93) : Colors.grey.shade600,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   Text(
                     'Total: 60min',
-                    style: TextStyle(fontSize: 15.sp, color: const Color(0xFF8E8E93), fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      color: isDarkMode ? Color(0xFF8E8E93) : Colors.grey.shade600,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ],
               ),
@@ -186,7 +204,7 @@ class _PlanScreenState extends State<PlanScreen> {
             Center(
               child: SizedBox(
                 width: 200.w,
-                child: Divider(color: Colors.grey[900], thickness: 1.h),
+                child: Divider(color: isDarkMode ? Colors.grey[900] : Colors.grey.shade400, thickness: 1.h),
               ),
             ),
             SizedBox(height: 4.h),
@@ -196,7 +214,7 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  Widget _buildDayItem(DayData day, int dayIndex) {
+  Widget _buildDayItem(DayData day, int dayIndex, bool isDarkMode) {
     final daySlotHeight = 65.h;
 
     return Padding(
@@ -213,7 +231,7 @@ class _PlanScreenState extends State<PlanScreen> {
                   day.dayName,
                   style: TextStyle(
                     fontSize: 15.sp,
-                    color: const Color(0xFF8E8E93),
+                    color: isDarkMode ? Color(0xFF8E8E93) : Colors.grey.shade600,
                     fontWeight: FontWeight.w400,
                     height: 1.2.h,
                   ),
@@ -223,7 +241,7 @@ class _PlanScreenState extends State<PlanScreen> {
                   day.date,
                   style: TextStyle(
                     fontSize: 32.sp,
-                    color: const Color(0xFF636366),
+                    color: isDarkMode ? Color(0xFF636366) : Colors.grey.shade500,
                     fontWeight: FontWeight.w300,
                     height: 1.0.h,
                   ),
@@ -243,21 +261,21 @@ class _PlanScreenState extends State<PlanScreen> {
                   constraints: BoxConstraints(minHeight: daySlotHeight),
                   decoration: BoxDecoration(
                     border: candidateData.isNotEmpty
-                        ? Border.all(color: const Color(0xFF5C6BC0).withOpacity(0.5), width: 2.w)
+                        ? Border.all(color: Color(0xFF5C6BC0).withOpacity(0.5), width: 2.w)
                         : null,
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                   child: day.workouts.isEmpty
                       ? Center(
                           child: candidateData.isNotEmpty
-                              ? Icon(
-                                  Icons.add_circle_outline,
-                                  color: const Color(0xFF5C6BC0).withOpacity(0.5),
-                                  size: 32.sp,
-                                )
+                              ? Icon(Icons.add_circle_outline, color: Color(0xFF5C6BC0).withOpacity(0.5), size: 32.sp)
                               : SizedBox(height: daySlotHeight),
                         )
-                      : Column(children: day.workouts.map((workout) => _buildWorkoutCard(workout, dayIndex)).toList()),
+                      : Column(
+                          children: day.workouts
+                              .map((workout) => _buildWorkoutCard(workout, dayIndex, isDarkMode))
+                              .toList(),
+                        ),
                 );
               },
             ),
@@ -267,7 +285,7 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
-  Widget _buildWorkoutCard(WorkoutData workout, int dayIndex) {
+  Widget _buildWorkoutCard(WorkoutData workout, int dayIndex, bool isDarkMode) {
     final cardHeight = 65.h;
 
     return LongPressDraggable<DragData>(
@@ -276,18 +294,18 @@ class _PlanScreenState extends State<PlanScreen> {
         color: Colors.transparent,
         child: Opacity(
           opacity: 0.95,
-          child: SizedBox(width: 0.8.sw, height: cardHeight, child: _workoutCardStack(workout)),
+          child: SizedBox(width: 0.8.sw, height: cardHeight, child: _workoutCardStack(workout, isDarkMode)),
         ),
       ),
       childWhenDragging: Opacity(
         opacity: 0.3,
-        child: SizedBox(height: cardHeight, child: _workoutCardStack(workout)),
+        child: SizedBox(height: cardHeight, child: _workoutCardStack(workout, isDarkMode)),
       ),
-      child: SizedBox(height: cardHeight, child: _workoutCardStack(workout)),
+      child: SizedBox(height: cardHeight, child: _workoutCardStack(workout, isDarkMode)),
     );
   }
 
-  Widget _workoutCardStack(WorkoutData workout) {
+  Widget _workoutCardStack(WorkoutData workout, bool isDarkMode) {
     final pillWidth = 14.w;
 
     return Stack(
@@ -300,21 +318,25 @@ class _PlanScreenState extends State<PlanScreen> {
           child: Container(
             width: pillWidth,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isDarkMode ? Colors.white : Colors.black87,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(8.r), bottomLeft: Radius.circular(8.r)),
             ),
           ),
         ),
         Container(
           padding: EdgeInsets.all(8.w),
-          decoration: BoxDecoration(color: const Color(0xFF2C2C2E), borderRadius: BorderRadius.circular(6.r)),
-          child: _buildWorkoutContent(workout),
+          decoration: BoxDecoration(
+            color: isDarkMode ? Color(0xFF2C2C2E) : Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(6.r),
+            border: isDarkMode ? null : Border.all(color: Colors.grey.shade300, width: 1.w),
+          ),
+          child: _buildWorkoutContent(workout, isDarkMode),
         ),
       ],
     );
   }
 
-  Widget _buildWorkoutContent(WorkoutData workout) {
+  Widget _buildWorkoutContent(WorkoutData workout, bool isDarkMode) {
     return Row(
       children: [
         Column(
@@ -326,13 +348,19 @@ class _PlanScreenState extends State<PlanScreen> {
                 Container(
                   width: 3.w,
                   height: 3.w,
-                  decoration: const BoxDecoration(color: Color(0xFF636366), shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Color(0xFF636366) : Colors.grey.shade600,
+                    shape: BoxShape.circle,
+                  ),
                 ),
                 SizedBox(width: 4.w),
                 Container(
                   width: 3.w,
                   height: 3.w,
-                  decoration: const BoxDecoration(color: Color(0xFF636366), shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Color(0xFF636366) : Colors.grey.shade600,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ],
             ),
@@ -343,13 +371,19 @@ class _PlanScreenState extends State<PlanScreen> {
                 Container(
                   width: 3.w,
                   height: 3.w,
-                  decoration: const BoxDecoration(color: Color(0xFF636366), shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Color(0xFF636366) : Colors.grey.shade600,
+                    shape: BoxShape.circle,
+                  ),
                 ),
                 SizedBox(width: 4.w),
                 Container(
                   width: 3.w,
                   height: 3.w,
-                  decoration: const BoxDecoration(color: Color(0xFF636366), shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Color(0xFF636366) : Colors.grey.shade600,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ],
             ),
@@ -360,13 +394,19 @@ class _PlanScreenState extends State<PlanScreen> {
                 Container(
                   width: 3.w,
                   height: 3.w,
-                  decoration: const BoxDecoration(color: Color(0xFF636366), shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Color(0xFF636366) : Colors.grey.shade600,
+                    shape: BoxShape.circle,
+                  ),
                 ),
                 SizedBox(width: 4.w),
                 Container(
                   width: 3.w,
                   height: 3.w,
-                  decoration: const BoxDecoration(color: Color(0xFF636366), shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? Color(0xFF636366) : Colors.grey.shade600,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ],
             ),
@@ -394,7 +434,7 @@ class _PlanScreenState extends State<PlanScreen> {
                 workout.title,
                 style: TextStyle(
                   fontSize: 17.sp,
-                  color: Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black87,
                   fontWeight: FontWeight.w400,
                   letterSpacing: -0.2.w,
                 ),
@@ -406,11 +446,13 @@ class _PlanScreenState extends State<PlanScreen> {
         ),
         Text(
           workout.duration,
-          style: TextStyle(fontSize: 15.sp, color: const Color(0xFF8E8E93), fontWeight: FontWeight.w400),
+          style: TextStyle(
+            fontSize: 15.sp,
+            color: isDarkMode ? Color(0xFF8E8E93) : Colors.grey.shade600,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ],
     );
   }
 }
-
-
