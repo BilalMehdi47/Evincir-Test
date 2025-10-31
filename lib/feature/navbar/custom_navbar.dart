@@ -1,7 +1,7 @@
 import 'package:evencir_test/constants/app_images.dart';
 import 'package:evencir_test/feature/home/presentation/home_screen.dart';
 import 'package:evencir_test/feature/mood/presentation/mood_screen.dart';
-import 'package:evencir_test/feature/profile/profile_screen.dart';
+import 'package:evencir_test/feature/profile/presentation/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../plan/presentation/plan_screen.dart';

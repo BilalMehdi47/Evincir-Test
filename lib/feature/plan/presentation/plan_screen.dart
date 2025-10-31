@@ -25,8 +25,8 @@ class _PlanScreenState extends State<PlanScreen> {
         ),
       ],
     ),
-    DayData(dayName: 'Tue', date: '9'),
-    DayData(dayName: 'Wed', date: '10'),
+    DayData(dayName: 'Tue', date: '9', workouts: []),
+    DayData(dayName: 'Wed', date: '10', workouts: []),
     DayData(
       dayName: 'Thu',
       date: '11',
@@ -41,15 +41,18 @@ class _PlanScreenState extends State<PlanScreen> {
         ),
       ],
     ),
-    DayData(dayName: 'Fri', date: '12'),
-    DayData(dayName: 'Sat', date: '13'),
-    DayData(dayName: 'Sun', date: '14'),
+    DayData(dayName: 'Fri', date: '12', workouts: []),
+    DayData(dayName: 'Sat', date: '13', workouts: []),
+    DayData(dayName: 'Sun', date: '14', workouts: []),
   ];
 
-  void _moveWorkout(String workoutId, int fromDayIndex, int toDayIndex) {
+  /// Robust move function — finds current source by id instead of trusting indexes.
+  void _moveWorkout(String workoutId, int toDayIndex) {
     setState(() {
-      final workout = weekDays[fromDayIndex].workouts.firstWhere((w) => w.id == workoutId);
-      weekDays[fromDayIndex].workouts.removeWhere((w) => w.id == workoutId);
+      final sourceIndex = weekDays.indexWhere((d) => d.workouts.any((w) => w.id == workoutId));
+      if (sourceIndex == -1 || sourceIndex == toDayIndex) return;
+      final workout = weekDays[sourceIndex].workouts.firstWhere((w) => w.id == workoutId);
+      weekDays[sourceIndex].workouts.removeWhere((w) => w.id == workoutId);
       weekDays[toDayIndex].workouts.add(workout);
     });
   }
@@ -57,7 +60,6 @@ class _PlanScreenState extends State<PlanScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
@@ -216,7 +218,6 @@ class _PlanScreenState extends State<PlanScreen> {
 
   Widget _buildDayItem(DayData day, int dayIndex, bool isDarkMode) {
     final daySlotHeight = 65.h;
-
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Row(
@@ -254,7 +255,7 @@ class _PlanScreenState extends State<PlanScreen> {
             child: DragTarget<DragData>(
               onWillAccept: (data) => data != null,
               onAccept: (data) {
-                _moveWorkout(data.workoutId, data.fromDayIndex, dayIndex);
+                _moveWorkout(data.workoutId, dayIndex);
               },
               builder: (context, candidateData, rejectedData) {
                 return Container(
@@ -273,7 +274,12 @@ class _PlanScreenState extends State<PlanScreen> {
                         )
                       : Column(
                           children: day.workouts
-                              .map((workout) => _buildWorkoutCard(workout, dayIndex, isDarkMode))
+                              .map(
+                                (workout) => KeyedSubtree(
+                                  key: ValueKey(workout.id),
+                                  child: _buildWorkoutCard(workout, dayIndex, isDarkMode),
+                                ),
+                              )
                               .toList(),
                         ),
                 );
@@ -285,29 +291,40 @@ class _PlanScreenState extends State<PlanScreen> {
     );
   }
 
+  /// Build workout card with LongPressDraggable for drag-and-drop.
   Widget _buildWorkoutCard(WorkoutData workout, int dayIndex, bool isDarkMode) {
     final cardHeight = 65.h;
-
     return LongPressDraggable<DragData>(
       data: DragData(workoutId: workout.id, fromDayIndex: dayIndex),
-      feedback: Material(
-        color: Colors.transparent,
-        child: Opacity(
-          opacity: 0.95,
-          child: SizedBox(width: 0.8.sw, height: cardHeight, child: _workoutCardStack(workout, isDarkMode)),
+      feedback: Opacity(
+        opacity: 0.8,
+        child: Container(
+          width: 300.w, // Adjust based on your layout; ensures feedback doesn't stretch
+          height: cardHeight,
+          decoration: BoxDecoration(
+            color: isDarkMode ? Color(0xFF2C2C2E) : Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(6.r),
+            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 8, offset: const Offset(0, 2))],
+          ),
+          child: _workoutCardStack(workout, isDarkMode),
         ),
       ),
-      childWhenDragging: Opacity(
-        opacity: 0.3,
-        child: SizedBox(height: cardHeight, child: _workoutCardStack(workout, isDarkMode)),
+      childWhenDragging: Container(height: cardHeight, color: Colors.transparent),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 6.h, horizontal: 6.w),
+        padding: EdgeInsets.all(4.w),
+        decoration: BoxDecoration(
+          color: isDarkMode ? Color(0xFF2C2C2E) : Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(6.r),
+          border: isDarkMode ? null : Border.all(color: Colors.grey.shade300, width: 1.w),
+        ),
+        child: _workoutCardStack(workout, isDarkMode),
       ),
-      child: SizedBox(height: cardHeight, child: _workoutCardStack(workout, isDarkMode)),
     );
   }
 
   Widget _workoutCardStack(WorkoutData workout, bool isDarkMode) {
     final pillWidth = 14.w;
-
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -325,11 +342,7 @@ class _PlanScreenState extends State<PlanScreen> {
         ),
         Container(
           padding: EdgeInsets.all(8.w),
-          decoration: BoxDecoration(
-            color: isDarkMode ? Color(0xFF2C2C2E) : Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(6.r),
-            border: isDarkMode ? null : Border.all(color: Colors.grey.shade300, width: 1.w),
-          ),
+          decoration: BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(6.r)),
           child: _buildWorkoutContent(workout, isDarkMode),
         ),
       ],
@@ -416,7 +429,6 @@ class _PlanScreenState extends State<PlanScreen> {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 workout.category,
@@ -429,11 +441,11 @@ class _PlanScreenState extends State<PlanScreen> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 3.h),
+              SizedBox(height: 2.h),
               Text(
                 workout.title,
                 style: TextStyle(
-                  fontSize: 17.sp,
+                  fontSize: 14.sp,
                   color: isDarkMode ? Colors.white : Colors.black87,
                   fontWeight: FontWeight.w400,
                   letterSpacing: -0.2.w,
@@ -447,7 +459,7 @@ class _PlanScreenState extends State<PlanScreen> {
         Text(
           workout.duration,
           style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 13.sp,
             color: isDarkMode ? Color(0xFF8E8E93) : Colors.grey.shade600,
             fontWeight: FontWeight.w400,
           ),
