@@ -1,4 +1,4 @@
-import 'package:evencir_test/feature/plan/presentation/plan_screen_drag_data_widget.dart';
+import 'package:evencir_test/feature/plan/presentation/widgets/plan_screen_drag_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
